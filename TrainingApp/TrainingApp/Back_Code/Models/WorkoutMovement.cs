@@ -37,6 +37,10 @@ namespace TrainingApp
 
         public int? Minuto { get; set; }
 
+        public bool Completo { get; set; }
+
+        public virtual Movement Movement { get; set; }
+
         public virtual Workout Workout { get; set; }
 
     }

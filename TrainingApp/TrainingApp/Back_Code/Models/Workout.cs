@@ -46,6 +46,7 @@ namespace TrainingApp
     public class WorkoutAmrap : Workout
     {
         public int VueltasCompletas { get; set; }
+        public int? RepeticionesExtra { get; set; }
     }
 
     public class WorkoutPerTime: Workout
