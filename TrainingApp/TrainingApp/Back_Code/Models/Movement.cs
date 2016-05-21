@@ -9,10 +9,12 @@ namespace TrainingApp
     public enum TipoElemento
     {
         barra = 1,
-        ketllebell = 2,
-        pelota = 3,
-        soga = 4,
-        libre = 5,
+        barra_dominadas = 2,
+        ketllebell = 3,
+        pelota = 5,
+        soga = 7,
+        libre = 9,
+        cajon = 11
     }
 
     public class Movement

@@ -39,6 +39,8 @@ namespace TrainingApp
 
         public int TiempoMaximoSegundo { get; set; }
 
+        public float? Rx { get; set; }
+
         public virtual ICollection<WorkoutMovement> Movimientos { get; set; }
 
     }

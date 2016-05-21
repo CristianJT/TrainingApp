@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace TrainingApp
+﻿namespace TrainingApp
 {
 
     public class WorkoutMovement
@@ -20,8 +14,6 @@ namespace TrainingApp
         public float? PesoEjecutado { get; set; }
 
         public float? PesoAlternativo1 { get; set; }
-
-        public float? PesoRx { get; set; }
 
         public decimal? Distancia { get; set; }
 
