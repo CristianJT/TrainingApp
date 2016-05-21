@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace TrainingApp.Back_Code.Models
+namespace TrainingApp
 {
     public class TrainingAppContext : DbContext
     {

@@ -5,14 +5,14 @@ namespace TrainingApp.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<TrainingApp.Back_Code.Models.TrainingAppContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<TrainingApp.TrainingAppContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(TrainingApp.Back_Code.Models.TrainingAppContext context)
+        protected override void Seed(TrainingApp.TrainingAppContext context)
         {
             context.Movements.AddOrUpdate(new Movement[] {
                 new Movement { Id = 1, Nombre = "Double under", Elemento = TipoElemento.soga },

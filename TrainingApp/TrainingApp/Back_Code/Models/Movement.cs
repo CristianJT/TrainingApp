@@ -30,5 +30,7 @@ namespace TrainingApp
         [MaxLength(255)]
         public string Descripcion { get; set; }
 
+        public virtual ICollection<WorkoutMovement> Wods { get; set; }
+
     }
 }
