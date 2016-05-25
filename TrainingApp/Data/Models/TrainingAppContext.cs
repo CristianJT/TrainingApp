@@ -12,7 +12,7 @@ namespace TrainingApp
         public TrainingAppContext() : base("name=TrainingAppDB")
         {
             //Database.SetInitializer(new DropCreateDatabaseAlways<TrainingAppContext>());
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrainingAppContext, Data.Migrations.Configuration>("TrainingAppContext"));
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<TrainingAppContext, Data.Migrations.Configuration>("TrainingAppDB"));
         }
 
         public DbSet<Movement> Movements { get; set; }
