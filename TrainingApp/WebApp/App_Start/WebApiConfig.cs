@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,21 @@ namespace WebApp
         {
             // Web API configuration and services
 
+            var DefFormatter = new Newtonsoft.Json.JsonSerializerSettings();
+
+            DefFormatter.Formatting = Newtonsoft.Json.Formatting.None;
+            DefFormatter.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+            DefFormatter.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+            DefFormatter.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+            Newtonsoft.Json.JsonConvert.DefaultSettings = () => DefFormatter;
+            config.Formatters.JsonFormatter.SerializerSettings = DefFormatter;
+
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            //Remove XML Formatter
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }
