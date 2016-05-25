@@ -1,4 +1,4 @@
-namespace TrainingApp.Migrations
+namespace Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -48,20 +48,18 @@ namespace TrainingApp.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Tipo = c.Int(nullable: false),
                         Nombre = c.String(maxLength: 50),
                         Fecha = c.DateTime(nullable: false),
                         TiempoMaximoMinuto = c.Int(nullable: false),
                         TiempoMaximoSegundo = c.Int(nullable: false),
                         Rx = c.Single(),
+                        Rondas = c.Int(),
                         VueltasCompletas = c.Int(),
                         RepeticionesExtra = c.Int(),
-                        Tipo = c.Int(),
                         RondasGrupoEjercicio = c.Int(),
-                        RondasTotales = c.Int(),
-                        Rondas = c.Int(),
                         TiempoFinalizacionMinuto = c.Int(),
                         TiempoFinalizacionSegundo = c.Int(),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Fecha);

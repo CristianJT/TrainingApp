@@ -9,12 +9,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9D4F9F3F-73DC-4FAD-B81B-F63C5D0038FE}</ProjectGuid>
+    <ProjectGuid>{2E4DE06F-3941-4AEE-B7A1-28DCF403EACA}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TrainingApp</RootNamespace>
-    <AssemblyName>TrainingApp</AssemblyName>
+    <RootNamespace>WebApp</RootNamespace>
+    <AssemblyName>WebApp</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -84,10 +84,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -107,6 +103,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -125,25 +124,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Back_Code\Controllers\MovementsController.cs" />
-    <Compile Include="Back_Code\Controllers\WorkoutsController.cs" />
-    <Compile Include="Back_Code\DTOs\WorkoutDTO.cs" />
-    <Compile Include="Back_Code\Models\Movement.cs" />
-    <Compile Include="Back_Code\Models\TrainingAppContext.cs" />
-    <Compile Include="Back_Code\Models\Workout.cs" />
-    <Compile Include="Back_Code\Models\WorkoutMovement.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605212004170_Initial.cs" />
-    <Compile Include="Migrations\201605212004170_Initial.Designer.cs">
-      <DependentUpon>201605212004170_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605212041398_Second.cs" />
-    <Compile Include="Migrations\201605212041398_Second.Designer.cs">
-      <DependentUpon>201605212041398_Second.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -158,13 +141,12 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605212004170_Initial.resx">
-      <DependentUpon>201605212004170_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605212041398_Second.resx">
-      <DependentUpon>201605212041398_Second.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{1ac84ed9-add0-48dd-9c20-7a9f1ed01e53}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -179,9 +161,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52590</DevelopmentServerPort>
+          <DevelopmentServerPort>52085</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52590/</IISUrl>
+          <IISUrl>http://localhost:51298/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

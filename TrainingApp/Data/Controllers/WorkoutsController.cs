@@ -17,6 +17,7 @@ namespace TrainingApp
         private TrainingAppContext db = new TrainingAppContext();
 
         [Route("")]
+        [HttpGet]
         public IHttpActionResult GetWorkouts()
         {
             var wods = db.Workouts.ToArray();
@@ -79,6 +80,7 @@ namespace TrainingApp
             {
                 return BadRequest(ModelState);
             }
+            Workout wod = new Workout();
 
             db.Workouts.Add(workout);
             db.SaveChanges();

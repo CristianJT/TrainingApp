@@ -13,10 +13,13 @@ namespace TrainingApp
 
     public enum Tipo
     {
-        emom = 1,
-        e2mo2m = 2,
-        otm = 3,
-        ot2m = 4
+        amrap = 1,
+        rounds_per_time = 2,
+        chipper = 3,
+        emom = 4,
+        e2mo2m = 5,
+        otm = 6,
+        ot2m = 7
     }
 
     public class Workout
@@ -28,6 +31,9 @@ namespace TrainingApp
 
         public int Id { get; set; }
 
+        [Required]
+        public Tipo Tipo { get; set; }
+
         [MaxLength(50)]
         public string Nombre { get; set; }
 
@@ -35,47 +41,42 @@ namespace TrainingApp
         [Required]
         public DateTime Fecha { get; set; }
 
+        [Required]
         public int TiempoMaximoMinuto { get; set; }
 
+        [Required]
         public int TiempoMaximoSegundo { get; set; }
 
         public float? Rx { get; set; }
+
+        public int? Rondas { get; set; }
+
+        //AMRAP
+        public int? VueltasCompletas { get; set; }
+        public int? RepeticionesExtra { get; set; }
+
+        //ON MINUTE
+        public int? RondasGrupoEjercicio { get; set; }
+
+        //ROUNDS PER TIME
+        public int? TiempoFinalizacionMinuto { get; set; }
+        public int? TiempoFinalizacionSegundo { get; set; }
+
+        [NotMapped]
+        public Estado? WorkoutEstado
+        {
+            get
+            {
+                if (TiempoFinalizacionMinuto.HasValue && TiempoFinalizacionSegundo.HasValue)
+                    return Estado.completo;
+                else
+                    return Estado.incompleto;
+            }
+
+        }
 
         public virtual ICollection<WorkoutMovement> Movimientos { get; set; }
 
     }
 
-    public class WorkoutAmrap : Workout
-    {
-        public int VueltasCompletas { get; set; }
-        public int? RepeticionesExtra { get; set; }
-    }
-
-    public class WorkoutPerTime: Workout
-    {
-        public int Rondas { get; set; }
-        public int? TiempoFinalizacionMinuto { get; set; }
-        public int? TiempoFinalizacionSegundo { get; set; }
-
-        [NotMapped]
-        public Estado WorkoutEstado
-        {
-            get
-            {
-                if (TiempoFinalizacionMinuto.HasValue && TiempoFinalizacionSegundo.HasValue)               
-                    return Estado.completo;
-                 else               
-                    return Estado.incompleto;              
-            }
-            
-        }
-    }
-
-    public class WorkoutOnMinute: Workout
-    {
-        public Tipo Tipo { get; set; }
-        public int RondasGrupoEjercicio { get; set; }
-        public int RondasTotales { get; set; }
-
-    }
 }
