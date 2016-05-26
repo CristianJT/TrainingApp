@@ -13,7 +13,7 @@
 
         public float? PesoEjecutado { get; set; }
 
-        public float? PesoAlternativo1 { get; set; }
+        public float? PesoAlternativo { get; set; }
 
         public decimal? Distancia { get; set; }
 
@@ -27,7 +27,9 @@
 
         public string AdaptacionTipo { get; set; }
 
-        public int? Minuto { get; set; }
+        public int? RondaNumero { get; set; }
+
+        public int? MinutoNumero { get; set; }
 
         public bool Completo { get; set; }
 

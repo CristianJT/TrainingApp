@@ -82,6 +82,10 @@
     <Compile Include="Migrations\201605251716059_Initial.Designer.cs">
       <DependentUpon>201605251716059_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605252158147_FixModel.cs" />
+    <Compile Include="Migrations\201605252158147_FixModel.Designer.cs">
+      <DependentUpon>201605252158147_FixModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Movement.cs" />
     <Compile Include="Models\TrainingAppContext.cs" />
@@ -96,6 +100,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605251716059_Initial.resx">
       <DependentUpon>201605251716059_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605252158147_FixModel.resx">
+      <DependentUpon>201605252158147_FixModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

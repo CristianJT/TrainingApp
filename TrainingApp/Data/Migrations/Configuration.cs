@@ -24,7 +24,9 @@ namespace Data.Migrations
                 new Movement { Id = 6, Nombre = "ketllebell snatch", Elemento = TipoElemento.ketllebell },
                 new Movement { Id = 7, Nombre = "Knees to elbows", Elemento = TipoElemento.barra_dominadas },
                 new Movement { Id = 8, Nombre = "ketllebell crossfit swing", Elemento = TipoElemento.ketllebell },
-                new Movement { Id = 9, Nombre = "Burpee", Elemento = TipoElemento.libre }
+                new Movement { Id = 9, Nombre = "Burpee", Elemento = TipoElemento.libre },
+                new Movement { Id = 10, Nombre = "Power clean", Elemento = TipoElemento.barra },
+                new Movement { Id = 11, Nombre = "Hand stand push up", Elemento = TipoElemento.libre }
             });
 
             context.Workouts.AddOrUpdate(
@@ -33,12 +35,12 @@ namespace Data.Migrations
             );
 
             context.WorkoutMovements.AddOrUpdate(new WorkoutMovement[] {
-                new WorkoutMovement { Id = 1, WorkoutId = 1, MovementId = 6, Repeticiones = 12, Minuto = 1, PesoEjecutado = 16, Completo = true },
-                new WorkoutMovement { Id = 2, WorkoutId = 1, MovementId = 9, Repeticiones = 1, Minuto = 1, Completo = true },
-                new WorkoutMovement { Id = 3, WorkoutId = 1, MovementId = 7, Repeticiones = 12, Minuto = 2, Completo = true },
-                new WorkoutMovement { Id = 4, WorkoutId = 1, MovementId = 9, Repeticiones = 2, Minuto = 2, Completo = true },
-                new WorkoutMovement { Id = 5, WorkoutId = 1, MovementId = 8, Repeticiones = 12, Minuto = 3,  PesoEjecutado = 21, Completo = true },
-                new WorkoutMovement { Id = 6, WorkoutId = 1, MovementId = 9, Repeticiones = 3, Minuto = 3, Completo = true },
+                new WorkoutMovement { Id = 1, WorkoutId = 1, MovementId = 6, Repeticiones = 12, MinutoNumero = 1, PesoEjecutado = 16, Completo = true },
+                new WorkoutMovement { Id = 2, WorkoutId = 1, MovementId = 9, Repeticiones = 1, MinutoNumero = 1, Completo = true },
+                new WorkoutMovement { Id = 3, WorkoutId = 1, MovementId = 7, Repeticiones = 12, MinutoNumero = 2, Completo = true },
+                new WorkoutMovement { Id = 4, WorkoutId = 1, MovementId = 9, Repeticiones = 2, MinutoNumero = 2, Completo = true },
+                new WorkoutMovement { Id = 5, WorkoutId = 1, MovementId = 8, Repeticiones = 12, MinutoNumero = 3,  PesoEjecutado = 21, Completo = true },
+                new WorkoutMovement { Id = 6, WorkoutId = 1, MovementId = 9, Repeticiones = 3, MinutoNumero = 3, Completo = true },
                 new WorkoutMovement { Id = 7, WorkoutId = 2, MovementId = 1, Repeticiones = 100, Completo = true },
                 new WorkoutMovement { Id = 8, WorkoutId = 2, MovementId = 2, Repeticiones = 50, PesoEjecutado = 65, Completo = true },
                 new WorkoutMovement { Id = 9, WorkoutId = 2, MovementId = 3, Repeticiones = 50, Completo = true },
