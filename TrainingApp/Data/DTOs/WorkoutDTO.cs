@@ -40,9 +40,12 @@ namespace TrainingApp
         public int? rondas_grupo_ejercicio { get; set; }
         public int? tiempo_finalizacion_minuto { get; set; }
         public int? tiempo_finalizacion_segundo { get; set; }
-        public Estado estado { get; set; }
+        public Estado? estado { get; set; }
+        public WorkoutMovementDTO[] movimientos { get; set; }
 
-        public WorkoutDTO() { }
+        public WorkoutDTO() {
+            this.movimientos = new WorkoutMovementDTO[] { };
+        }
 
         public WorkoutDTO(Workout wod)
         {
@@ -59,7 +62,61 @@ namespace TrainingApp
             this.rondas_grupo_ejercicio = wod.RondasGrupoEjercicio;
             this.tiempo_finalizacion_minuto = wod.TiempoFinalizacionMinuto;
             this.tiempo_finalizacion_segundo = wod.TiempoFinalizacionSegundo;
-        }
+            this.estado = wod.WorkoutEstado;
 
+            this.movimientos = wod.Movimientos.Select(x => new WorkoutMovementDTO(x)).ToArray();
+        }
+    }
+
+    public class WorkoutNuevoDTO
+    {
+        [MaxLength(50)]
+        public string nombre { get; set; }
+
+        [Required]
+        public Tipo tipo { get; set; }
+
+        [Required]
+        public DateTime fecha { get; set; }
+
+        [Required]
+        public int tiempo_maximo_minuto { get; set; }
+
+        [Required]
+        public int tiempo_maximo_segundo { get; set; }
+
+        public float? rx { get; set; }
+        public int? rondas { get; set; }
+        public int? vueltas_completas { get; set; }
+        public int? repeticiones_extra { get; set; }
+        public int? rondas_grupo_ejercicio { get; set; }
+        public int? tiempo_finalizacion_minuto { get; set; }
+        public int? tiempo_finalizacion_segundo { get; set; }
+
+        public int? setRondas(WorkoutNuevoDTO dto)
+        {
+            switch (dto.tipo)
+            {
+                case Tipo.rounds_per_time:
+                    rondas = dto.rondas;
+                    break;
+                case Tipo.chipper:
+                    rondas = 1;
+                    break;
+                case Tipo.emom:
+                    rondas = dto.tiempo_maximo_minuto;
+                    break;
+                case Tipo.e2mo2m:
+                    rondas = dto.tiempo_maximo_minuto / 2;
+                    break;
+                case Tipo.otm:
+                    rondas = dto.tiempo_maximo_minuto;
+                    break;
+                case Tipo.ot2m:
+                    rondas = dto.tiempo_maximo_minuto / 2;
+                    break;
+            }
+            return rondas;
+        }
     }
 }

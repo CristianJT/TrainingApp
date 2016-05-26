@@ -67,10 +67,15 @@ namespace TrainingApp
         {
             get
             {
-                if (TiempoFinalizacionMinuto.HasValue && TiempoFinalizacionSegundo.HasValue)
-                    return Estado.completo;
+                if (Tipo == Tipo.chipper || Tipo == Tipo.rounds_per_time)
+                {
+                    if (TiempoFinalizacionMinuto.HasValue && TiempoFinalizacionSegundo.HasValue)
+                        return Estado.completo;
+                    else
+                        return Estado.incompleto;
+                }
                 else
-                    return Estado.incompleto;
+                    return null;
             }
 
         }

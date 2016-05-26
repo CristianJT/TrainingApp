@@ -16,80 +16,119 @@ namespace TrainingApp
     {
         private TrainingAppContext db = new TrainingAppContext();
 
+        //GET: api/wods
         [Route("")]
         [HttpGet]
         public IHttpActionResult GetWorkouts()
         {
-            var wods = db.Workouts.ToArray();
-            return Ok(wods);
+            Workout[] wods = db.Workouts.AsNoTracking().ToArray();
+
+            if (wods.Length == 0)
+            {
+                return Ok(new WorkoutResumenDTO[] { });
+            }
+
+            WorkoutResumenDTO[] dtos = wods.Select(x => new WorkoutResumenDTO(x)).ToArray();
+
+            return Ok(dtos);
         }
 
+        //GET: api/wods/{id}
         [Route("{id}")]
-        [ResponseType(typeof(Workout))]
+        [ResponseType(typeof(WorkoutDTO))]
+        [HttpGet]
         public IHttpActionResult GetWorkout(int id)
         {
-            Workout workout = db.Workouts.Include(w=> w.Movimientos).Where(x=> x.Id == id).FirstOrDefault();
+            Workout workout = db.Workouts.Include(w=> w.Movimientos)
+                                         .Where(x=> x.Id == id).AsNoTracking()
+                                         .FirstOrDefault();
             if (workout == null)
             {
                 return NotFound();
             }
 
-            return Ok(workout);
+            WorkoutDTO dto = new WorkoutDTO(workout);
+            return Ok(dto);
         }
 
-        // PUT: api/Workouts/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutWorkout(int id, Workout workout)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != workout.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(workout).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!WorkoutExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Workouts
-        [ResponseType(typeof(Workout))]
-        public IHttpActionResult PostWorkout(Workout workout)
+        // POST: api/wods
+        [Route("")]
+        [ResponseType(typeof(WorkoutDTO))]
+        [HttpPost]
+        public IHttpActionResult CreateWorkout(WorkoutNuevoDTO dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             Workout wod = new Workout();
-
-            db.Workouts.Add(workout);
+            wod.Nombre = dto.nombre;
+            wod.Tipo = dto.tipo;
+            wod.Fecha = dto.fecha;
+            wod.TiempoMaximoMinuto = dto.tiempo_maximo_minuto;
+            wod.TiempoMaximoSegundo = dto.tiempo_maximo_segundo;
+            wod.Rx = dto.rx;  
+            wod.VueltasCompletas = dto.vueltas_completas;
+            wod.RepeticionesExtra = dto.repeticiones_extra;
+            wod.TiempoFinalizacionMinuto = dto.tiempo_finalizacion_minuto;
+            wod.TiempoFinalizacionSegundo = dto.tiempo_finalizacion_segundo;
+            wod.Rondas = dto.setRondas(dto);
+            wod.RondasGrupoEjercicio = dto.rondas_grupo_ejercicio;
+            
+            db.Workouts.Add(wod);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = workout.Id }, workout);
+            return Ok(new WorkoutDTO(wod));
         }
 
-        // DELETE: api/Workouts/5
+        // POST: api/wods/{id}/movimientos
+        [Route("{id}/movimientos")]
+        [ResponseType(typeof(WorkoutDTO))]
+        [HttpPost]
+        public IHttpActionResult AddWorkoutMovements(int id, WorkoutMovementNuevoDTO[] dtos)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Workout workout = db.Workouts.Find(id);
+            if (workout == null)
+            {
+                return NotFound();
+            }
+
+            WorkoutMovement movement;
+            foreach (WorkoutMovementNuevoDTO wm in dtos)
+            {
+                movement = new WorkoutMovement();
+                movement.WorkoutId = id;
+                movement.MovementId = wm.movimiento_id;
+                movement.Repeticiones = wm.repeticiones;
+                movement.PesoEjecutado = wm.peso;
+                movement.PesoAlternativo = wm.peso_alternativo;
+                movement.Distancia = wm.distancia;
+                movement.Altura = wm.altura;
+                movement.Adaptacion = wm.adaptacion;
+                movement.AdaptacionTipo = wm.adaptacion_tipo;
+                movement.Restriccion = wm.restriccion;
+                movement.RestriccionTipo = wm.restriccion_tipo;
+                movement.RondaNumero = wm.ronda;
+                movement.MinutoNumero = wm.minuto;
+                movement.Completo = wm.completo;
+
+                db.WorkoutMovements.Add(movement);
+            }
+            db.SaveChanges();
+
+            return Ok();
+        }
+
+
+        // DELETE: api/wods/{id}
+        [Route("{id}")]
         [ResponseType(typeof(Workout))]
+        [HttpDelete]
         public IHttpActionResult DeleteWorkout(int id)
         {
             Workout workout = db.Workouts.Find(id);
@@ -101,7 +140,7 @@ namespace TrainingApp
             db.Workouts.Remove(workout);
             db.SaveChanges();
 
-            return Ok(workout);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
