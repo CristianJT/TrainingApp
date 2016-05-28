@@ -14,6 +14,7 @@ namespace TrainingApp
         pelota = 5,
         soga = 7,
         libre = 9,
+        anillas = 10,
         cajon = 11
     }
 
@@ -25,6 +26,7 @@ namespace TrainingApp
         [MaxLength(80)]
         public string Nombre { get; set; }
 
+        [Required]
         public TipoElemento Elemento { get; set; }
 
         [MaxLength(255)]

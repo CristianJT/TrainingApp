@@ -1,4 +1,6 @@
-﻿namespace TrainingApp
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TrainingApp
 {
 
     public class WorkoutMovement
@@ -9,7 +11,14 @@
 
         public int MovementId { get; set; }
 
+        public string MovimientoAlternativo { get; set; }
+
+        [Required]
         public int Repeticiones { get; set; }
+
+        public int? RondaNumero { get; set; }
+
+        public int? MinutoNumero { get; set; }
 
         public float? PesoEjecutado { get; set; }
 
@@ -27,9 +36,9 @@
 
         public string AdaptacionTipo { get; set; }
 
-        public int? RondaNumero { get; set; }
+        public bool Unbroken { get; set; }
 
-        public int? MinutoNumero { get; set; }
+        public string Detalle { get; set; }
 
         public bool Completo { get; set; }
 

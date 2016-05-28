@@ -63,8 +63,11 @@ namespace TrainingApp
             }
             Workout wod = new Workout();
             wod.Nombre = dto.nombre;
-            wod.Tipo = dto.tipo;
+            wod.Tipo = dto.workout_tipo;
+            wod.SubTipo = dto.entrenamiento_tipo;
+            wod.GrupoTipo = dto.grupo_tipo;
             wod.Fecha = dto.fecha;
+            wod.Detalle = dto.detalle;
             wod.TiempoMaximoMinuto = dto.tiempo_maximo_minuto;
             wod.TiempoMaximoSegundo = dto.tiempo_maximo_segundo;
             wod.Rx = dto.rx;  
@@ -104,6 +107,7 @@ namespace TrainingApp
                 movement = new WorkoutMovement();
                 movement.WorkoutId = id;
                 movement.MovementId = wm.movimiento_id;
+                movement.MovimientoAlternativo = wm.movimiento_alternativo;
                 movement.Repeticiones = wm.repeticiones;
                 movement.PesoEjecutado = wm.peso;
                 movement.PesoAlternativo = wm.peso_alternativo;
@@ -115,6 +119,8 @@ namespace TrainingApp
                 movement.RestriccionTipo = wm.restriccion_tipo;
                 movement.RondaNumero = wm.ronda;
                 movement.MinutoNumero = wm.minuto;
+                movement.Unbroken = wm.unbroken;
+                movement.Detalle = wm.detalle;
                 movement.Completo = wm.completo;
 
                 db.WorkoutMovements.Add(movement);

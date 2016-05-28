@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Controllers\MovementsController.cs" />
     <Compile Include="Controllers\WorkoutsController.cs" />
+    <Compile Include="DTOs\MovementDTO.cs" />
     <Compile Include="DTOs\WorkoutDTO.cs" />
     <Compile Include="DTOs\WorkoutMovementDTO.cs" />
     <Compile Include="Migrations\201605251716059_Initial.cs" />
@@ -85,6 +86,10 @@
     <Compile Include="Migrations\201605252158147_FixModel.cs" />
     <Compile Include="Migrations\201605252158147_FixModel.Designer.cs">
       <DependentUpon>201605252158147_FixModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605281730205_Second.cs" />
+    <Compile Include="Migrations\201605281730205_Second.Designer.cs">
+      <DependentUpon>201605281730205_Second.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Movement.cs" />
@@ -103,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605252158147_FixModel.resx">
       <DependentUpon>201605252158147_FixModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605281730205_Second.resx">
+      <DependentUpon>201605281730205_Second.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

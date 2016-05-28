@@ -11,8 +11,10 @@ namespace TrainingApp
     {
         public int id { get; set; }
         public string nombre { get; set; }
-        public Tipo tipo { get; set; }
         public DateTime fecha { get; set; }
+        public WodTipo workout_tipo { get; set; }
+        public EntrenamientoTipo entrenamiento_tipo { get; set; }
+        public GrupoTipo grupo_tipo { get; set; }
 
         public WorkoutResumenDTO() { }
 
@@ -21,7 +23,9 @@ namespace TrainingApp
             this.id = wod.Id;
             this.fecha = wod.Fecha;
             this.nombre = wod.Nombre;
-            this.tipo = wod.Tipo;
+            this.workout_tipo = wod.Tipo;
+            this.entrenamiento_tipo = wod.SubTipo;
+            this.grupo_tipo = wod.GrupoTipo;
         }
     }
 
@@ -29,14 +33,17 @@ namespace TrainingApp
     {
         public int id { get; set; }
         public string nombre { get; set; }
-        public Tipo tipo { get; set; }
+        public WodTipo workout_tipo { get; set; }
+        public EntrenamientoTipo entrenamiento_tipo { get; set; }
+        public GrupoTipo grupo_tipo { get; set; }
         public DateTime fecha { get; set; }
+        public string detalle { get; set; }
         public int tiempo_maximo_minuto { get; set; }
         public int tiempo_maximo_segundo { get; set; }
         public float? rx { get; set; }
         public int? rondas { get; set; }
         public int? vueltas_completas { get; set; }
-        public int? repeticiones_extra { get; set; }
+        public string repeticiones_extra { get; set; }
         public int? rondas_grupo_ejercicio { get; set; }
         public int? tiempo_finalizacion_minuto { get; set; }
         public int? tiempo_finalizacion_segundo { get; set; }
@@ -52,7 +59,10 @@ namespace TrainingApp
             this.id = wod.Id;
             this.fecha = wod.Fecha;
             this.nombre = wod.Nombre;
-            this.tipo = wod.Tipo;
+            this.workout_tipo = wod.Tipo;
+            this.entrenamiento_tipo = wod.SubTipo;
+            this.grupo_tipo = wod.GrupoTipo;
+            this.detalle = wod.Detalle;
             this.tiempo_maximo_minuto = wod.TiempoMaximoMinuto;
             this.tiempo_maximo_segundo = wod.TiempoMaximoSegundo;
             this.rx = wod.Rx;
@@ -74,7 +84,13 @@ namespace TrainingApp
         public string nombre { get; set; }
 
         [Required]
-        public Tipo tipo { get; set; }
+        public WodTipo workout_tipo { get; set; }
+
+        [Required]
+        public EntrenamientoTipo entrenamiento_tipo { get; set; }
+
+        [Required]
+        public GrupoTipo grupo_tipo { get; set; }
 
         [Required]
         public DateTime fecha { get; set; }
@@ -85,34 +101,35 @@ namespace TrainingApp
         [Required]
         public int tiempo_maximo_segundo { get; set; }
 
+        public string detalle { get; set; }
         public float? rx { get; set; }
         public int? rondas { get; set; }
         public int? vueltas_completas { get; set; }
-        public int? repeticiones_extra { get; set; }
+        public string repeticiones_extra { get; set; }
         public int? rondas_grupo_ejercicio { get; set; }
         public int? tiempo_finalizacion_minuto { get; set; }
         public int? tiempo_finalizacion_segundo { get; set; }
 
         public int? setRondas(WorkoutNuevoDTO dto)
         {
-            switch (dto.tipo)
+            switch (dto.entrenamiento_tipo)
             {
-                case Tipo.rounds_per_time:
+                case EntrenamientoTipo.rounds_per_time:
                     rondas = dto.rondas;
                     break;
-                case Tipo.chipper:
+                case EntrenamientoTipo.chipper:
                     rondas = 1;
                     break;
-                case Tipo.emom:
+                case EntrenamientoTipo.emom:
                     rondas = dto.tiempo_maximo_minuto;
                     break;
-                case Tipo.e2mo2m:
+                case EntrenamientoTipo.e2mo2m:
                     rondas = dto.tiempo_maximo_minuto / 2;
                     break;
-                case Tipo.otm:
+                case EntrenamientoTipo.otm:
                     rondas = dto.tiempo_maximo_minuto;
                     break;
-                case Tipo.ot2m:
+                case EntrenamientoTipo.ot2m:
                     rondas = dto.tiempo_maximo_minuto / 2;
                     break;
             }
