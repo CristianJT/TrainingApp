@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -16,82 +11,94 @@ namespace TrainingApp
     {
         private TrainingAppContext db = new TrainingAppContext();
 
+        // GET: api/movimientos
         [Route("")]
+        [HttpGet]
         public IHttpActionResult GetMovements()
         {
-            var mv = db.Movements.ToArray();
-            return Ok(mv);
+            Movement[] mvs = db.Movements.AsNoTracking().ToArray();
+
+            if (mvs.Length == 0)
+            {
+                return Ok(new MovementResumenDTO[] { });
+            }
+
+            MovementResumenDTO[] dtos = mvs.Select(x => new MovementResumenDTO(x)).ToArray();
+            return Ok(dtos);
         }
 
+        // GET: api/movimientos/{id}
         [Route("{id}")]
         [HttpGet]
-        [ResponseType(typeof(Movement))]
+        [ResponseType(typeof(MovementDTO))]
         public IHttpActionResult GetMovement(int id)
         {
-            Movement movement = db.Movements.Where(x => x.Id == id).FirstOrDefault();
+            Movement movement = db.Movements.Include(m => m.Wods)
+                                            .Where(x => x.Id == id).AsNoTracking()
+                                            .FirstOrDefault();
             if (movement == null)
             {
                 return NotFound();
             }
 
-            return Ok(movement);
+            MovementDTO dto = new MovementDTO(movement);
+            return Ok(dto);
         }
 
-        // PUT: api/Movements/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutMovement(int id, Movement movement)
+        // PUT: api/movimientos/{id}
+        [Route("{id}")]
+        [HttpPut]
+        [ResponseType(typeof(MovementResumenDTO))]
+        public IHttpActionResult UpdateMovement(int id, MovementNuevoDTO dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != movement.Id)
+            Movement movement = db.Movements.Where(m => m.Id == id).FirstOrDefault();
+            if (movement == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            db.Entry(movement).State = EntityState.Modified;
+            movement.Nombre = dto.nombre;
+            movement.Elemento = dto.tipo_elemento;
+            movement.Descripcion = dto.descripcion;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MovementExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            db.SaveChanges();
+            
+            return Ok(new MovementResumenDTO(movement));
         }
 
-        // POST: api/Movements
-        [ResponseType(typeof(Movement))]
-        public IHttpActionResult PostMovement(Movement movement)
+        // POST: api/movimientos
+        [Route("")]
+        [HttpPost]
+        [ResponseType(typeof(MovementResumenDTO))]
+        public IHttpActionResult CreateMovement(MovementNuevoDTO dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            Movement movement = new Movement();
+            movement.Nombre = dto.nombre;
+            movement.Elemento = dto.tipo_elemento;
+            movement.Descripcion = dto.descripcion;
 
             db.Movements.Add(movement);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = movement.Id }, movement);
+            return Ok(new MovementResumenDTO(movement));
         }
 
-        // DELETE: api/Movements/5
-        [ResponseType(typeof(Movement))]
+        // DELETE: api/movimientos/{id}
+        [Route("{id}")]
+        [HttpDelete]
         public IHttpActionResult DeleteMovement(int id)
         {
-            Movement movement = db.Movements.Find(id);
+            Movement movement = db.Movements.Where(m => m.Id == id).FirstOrDefault();
             if (movement == null)
             {
                 return NotFound();
@@ -100,7 +107,7 @@ namespace TrainingApp
             db.Movements.Remove(movement);
             db.SaveChanges();
 
-            return Ok(movement);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
@@ -112,9 +119,5 @@ namespace TrainingApp
             base.Dispose(disposing);
         }
 
-        private bool MovementExists(int id)
-        {
-            return db.Movements.Count(e => e.Id == id) > 0;
-        }
     }
 }

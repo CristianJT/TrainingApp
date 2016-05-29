@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -35,8 +30,8 @@ namespace TrainingApp
 
         //GET: api/wods/{id}
         [Route("{id}")]
-        [ResponseType(typeof(WorkoutDTO))]
         [HttpGet]
+        [ResponseType(typeof(WorkoutDTO))]
         public IHttpActionResult GetWorkout(int id)
         {
             Workout workout = db.Workouts.Include(w=> w.Movimientos)
@@ -53,8 +48,8 @@ namespace TrainingApp
 
         // POST: api/wods
         [Route("")]
-        [ResponseType(typeof(WorkoutDTO))]
         [HttpPost]
+        [ResponseType(typeof(WorkoutResumenDTO))]
         public IHttpActionResult CreateWorkout(WorkoutNuevoDTO dto)
         {
             if (!ModelState.IsValid)
@@ -81,12 +76,11 @@ namespace TrainingApp
             db.Workouts.Add(wod);
             db.SaveChanges();
 
-            return Ok(new WorkoutDTO(wod));
+            return Ok(new WorkoutResumenDTO(wod));
         }
 
         // POST: api/wods/{id}/movimientos
         [Route("{id}/movimientos")]
-        [ResponseType(typeof(WorkoutDTO))]
         [HttpPost]
         public IHttpActionResult AddWorkoutMovements(int id, WorkoutMovementNuevoDTO[] dtos)
         {
@@ -133,7 +127,6 @@ namespace TrainingApp
 
         // DELETE: api/wods/{id}
         [Route("{id}")]
-        [ResponseType(typeof(Workout))]
         [HttpDelete]
         public IHttpActionResult DeleteWorkout(int id)
         {
@@ -156,11 +149,6 @@ namespace TrainingApp
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool WorkoutExists(int id)
-        {
-            return db.Workouts.Count(e => e.Id == id) > 0;
         }
     }
 }

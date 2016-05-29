@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TrainingApp
 {
@@ -25,6 +21,25 @@ namespace TrainingApp
         }
     }
 
+    public class MovementDTO : MovementResumenDTO
+    {
+        public WorkoutMovementResumenDTO[] wods { get; set; }
+
+        public MovementDTO()
+        {
+            this.wods = new WorkoutMovementResumenDTO[] { };
+        }
+
+        public MovementDTO(Movement m)
+        {
+            this.id = m.Id;
+            this.nombre = m.Nombre;
+            this.tipo_elemento = m.Elemento;
+            this.descripcion = m.Descripcion;
+            this.wods = m.Wods.Select(w => new WorkoutMovementResumenDTO(w)).ToArray();
+        }
+    }
+
     public class MovementNuevoDTO
     {
         [Required]
@@ -34,6 +49,6 @@ namespace TrainingApp
         [Required]
         public TipoElemento tipo_elemento { get; set; }
 
-        public string Descripcion { get; set; }
+        public string descripcion { get; set; }
     }
 }

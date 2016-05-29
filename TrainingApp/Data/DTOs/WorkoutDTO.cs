@@ -29,14 +29,8 @@ namespace TrainingApp
         }
     }
 
-    public class WorkoutDTO
-    {
-        public int id { get; set; }
-        public string nombre { get; set; }
-        public WodTipo workout_tipo { get; set; }
-        public EntrenamientoTipo entrenamiento_tipo { get; set; }
-        public GrupoTipo grupo_tipo { get; set; }
-        public DateTime fecha { get; set; }
+    public class WorkoutDTO : WorkoutResumenDTO
+    {      
         public string detalle { get; set; }
         public int tiempo_maximo_minuto { get; set; }
         public int tiempo_maximo_segundo { get; set; }
