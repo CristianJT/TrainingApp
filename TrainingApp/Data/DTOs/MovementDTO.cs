@@ -9,6 +9,7 @@ namespace TrainingApp
         public string nombre { get; set; }
         public TipoElemento tipo_elemento { get; set; }
         public string descripcion { get; set; }
+        public int entrenamientos { get; set; }
 
         public MovementResumenDTO() { }
 
@@ -18,6 +19,7 @@ namespace TrainingApp
             this.nombre = m.Nombre;
             this.tipo_elemento = m.Elemento;
             this.descripcion = m.Descripcion;
+            this.entrenamientos = m.Wods.GroupBy(w => w.WorkoutId).ToArray().Length;
         }
     }
 

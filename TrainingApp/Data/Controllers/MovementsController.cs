@@ -16,7 +16,8 @@ namespace TrainingApp
         [HttpGet]
         public IHttpActionResult GetMovements()
         {
-            Movement[] mvs = db.Movements.AsNoTracking().ToArray();
+            Movement[] mvs = db.Movements.Include(m => m.Wods)
+                                         .AsNoTracking().ToArray();
 
             if (mvs.Length == 0)
             {
