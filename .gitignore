@@ -194,3 +194,6 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+TrainingApp/WebApp/app/**/*.js
+TrainingApp/WebApp/app/**/*.js.map
+typings/
