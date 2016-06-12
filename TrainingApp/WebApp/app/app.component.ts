@@ -10,8 +10,10 @@ import './rxjs-operators';
 @Component({
     selector: 'my-app',       //represents the component. Create an instance of the component
     template: `
-        <h1>{{title}}</h1>
-        <movimientos></movimientos>
+        <div class="container-fluid">
+            <h1>{{title}}</h1>
+            <movimientos></movimientos>
+        </div>        
     `,
     directives: [MovimientosComponent],
     providers: [
