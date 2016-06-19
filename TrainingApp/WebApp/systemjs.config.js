@@ -3,13 +3,19 @@
     var map = {
         'app': 'app', // 'dist',
         '@angular': 'node_modules/@angular',
-        'rxjs': 'node_modules/rxjs'
+        'rxjs': 'node_modules/rxjs',
+        'lodash': 'node_modules/lodash',
+        'ng2-bootstrap': 'node_modules/ng2-bootstrap',
+        'moment': 'node_modules/moment'
     };
 
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
         'app': { main: 'main.js', defaultExtension: 'js' },
         'rxjs': { defaultExtension: 'js' },
+        'lodash': { main: 'index.js', defaultExtension: 'js' },
+        'ng2-bootstrap': { main: 'ng2-bootstrap.js', defaultExtension: 'js' },
+        'moment': { main: 'moment.js', defaultExtension: 'js' }
     };
 
     var ngPackageNames = [
