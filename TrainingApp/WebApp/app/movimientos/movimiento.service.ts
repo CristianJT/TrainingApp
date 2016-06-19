@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
 
 import { Observable }     from 'rxjs/Observable';
 
@@ -13,6 +13,16 @@ export class MovimientoService {
 
     getMovimientos(): Observable<Movimiento[]> {
         return this.http.get(this.movimientoUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    addMovimiento(nombre: string, tipo_elemento: string, descripcion: string): Observable<Movimiento> {
+        let body = JSON.stringify({ nombre, tipo_elemento, descripcion });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.movimientoUrl, body, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

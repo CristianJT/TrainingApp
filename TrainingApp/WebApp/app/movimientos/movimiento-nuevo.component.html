@@ -1,0 +1,41 @@
+﻿<button class="btn btn-primary" (click)="modal.show()"><i class="fa fa-plus"></i> Nuevo</button>
+
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="modal.hide()" aria-label="Close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <h4 class="modal-title">Crear movimiento</h4>
+            </div>
+            <form *ngIf="active" #movementForm="ngForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" [(ngModel)]="model.nombre" ngControl="name" #name="ngForm" required>
+                        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                            El nombre es obligatorio
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo de elemento</label>
+                        <select class="form-control" [(ngModel)]="model.tipo_elemento" ngControl="element" #element="ngForm" required>
+                            <option *ngFor="let e of elementos" [value]="e">{{e}}</option>
+                        </select>
+                        <div [hidden]="element.valid || element.pristine" class="alert alert-danger">
+                            El tipo de elemento es obligatorio
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Descripcion</label>
+                        <textarea class="form-control" rows="2" [(ngModel)]="model.descripcion"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" (click)="crearMovimiento()" [disabled]="!movementForm.valid">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

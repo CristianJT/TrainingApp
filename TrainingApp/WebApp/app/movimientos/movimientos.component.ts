@@ -2,16 +2,17 @@
 
 import { MovimientoService } from './movimiento.service';
 import { Movimiento } from './movimiento';
+import { MovimientoNuevoComponent} from './movimiento-nuevo.component';
 
 @Component({
     selector: 'movimientos',
-    templateUrl: 'app/movimientos/movimientos.component.html'
+    templateUrl: 'app/movimientos/movimientos.component.html',
+    directives: [MovimientoNuevoComponent]
 })
 
 export class MovimientosComponent implements OnInit {
     movimientos: Movimiento[];
     errorMessage: string;
-    mode = 'Observable';
 
     constructor(
         private movimientoService: MovimientoService
@@ -27,4 +28,5 @@ export class MovimientosComponent implements OnInit {
     ngOnInit() {
         this.getMovimientos();
     }
+
 }

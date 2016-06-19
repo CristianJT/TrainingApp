@@ -119,8 +119,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\css\forms.css" />
+    <Content Include="app\movimientos\movimiento-nuevo.component.html" />
     <Content Include="app\movimientos\movimientos.component.html" />
     <Content Include="Global.asax" />
+    <Content Include="gulpfile.js" />
     <Content Include="index.html" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
@@ -151,6 +154,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\main.ts" />
+    <TypeScriptCompile Include="app\movimientos\movimiento-nuevo.component.ts" />
     <TypeScriptCompile Include="app\movimientos\movimiento.service.ts" />
     <TypeScriptCompile Include="app\movimientos\movimiento.ts" />
     <TypeScriptCompile Include="app\movimientos\movimientos.component.ts" />

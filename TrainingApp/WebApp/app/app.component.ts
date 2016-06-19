@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, ViewContainerRef } from '@angular/core';
 import { HTTP_PROVIDERS } from '@angular/http';
 
 import { MovimientoService } from './movimientos/movimiento.service';
@@ -24,4 +24,10 @@ import './rxjs-operators';
 
 export class AppComponent {
     title = 'Trainning app';
+    viewContainerRef: ViewContainerRef;
+
+    public constructor(viewContainerRef: ViewContainerRef) {
+        // You need this small hack in order to catch application root view container ref
+        this.viewContainerRef = viewContainerRef;
+    }
 }
