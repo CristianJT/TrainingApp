@@ -20,6 +20,11 @@ namespace TrainingApp
 
     public class Movement
     {
+        public Movement()
+        {
+            Wods = new HashSet<WorkoutMovement>();
+        }
+
         public int Id { get; set; }
 
         [Required]
