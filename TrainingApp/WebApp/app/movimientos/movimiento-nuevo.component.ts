@@ -29,8 +29,7 @@ export class MovimientoNuevoComponent {
         private toastr: ToastsManager
     ) { }
 
-    @Input()
-    movimientos: Movimiento[];
+    @Input() grupos: any[];
 
     ngOnInit() {
         this.model = new Movimiento();
@@ -39,16 +38,34 @@ export class MovimientoNuevoComponent {
         this.elementos = ELEMENTOS;
     }
 
+    asignarGrupo(movimiento) {
+        let m = _.find(this.grupos, function (g) {
+            return g.elemento_id == movimiento.tipo_elemento;
+        });
+        if (typeof m !== 'undefined')
+            m.movimientos.push(movimiento);
+        else {
+            let movimientos_array = [movimiento];
+            let nuevo_grupo = {
+                elemento_id: movimiento.tipo_elemento,
+                title: _.upperFirst(_.lowerCase(movimiento.tipo_elemento)),
+                movimientos: movimientos_array
+            }
+            this.grupos.push(nuevo_grupo);
+        }
+        
+    }
+
     crearMovimiento() {
-        this.movimientos_nombre = _.map(this.movimientos, 'nombre');
-        if (!_.includes(this.movimientos_nombre, this.model.nombre)) {
+        this.movimientos_nombre = _.flatten(_.map(this.grupos, function (g) { return _.map(g.movimientos, 'nombre') }));
+        if (!_.includes(_.lowerCase(this.movimientos_nombre), _.lowerCase(this.model.nombre))) {
             this.cargando = true;
             this.movimientoService.addMovimiento(this.model.nombre, this.model.tipo_elemento, this.model.descripcion)
                 .subscribe(
                 data => (
                     this.cargando = false,
+                    this.asignarGrupo(data),
                     this.toastr.success('Movimiento creado correctamente'),
-                    this.movimientos.push(data),
                     this.model = new Movimiento(),
                     this.active = false,
                     setTimeout(() => this.active = true, 0)

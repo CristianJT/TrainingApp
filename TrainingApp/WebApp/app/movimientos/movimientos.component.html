@@ -9,17 +9,22 @@
         </div>
     </div>
     <div class="col-sm-2">
-        <movimiento-nuevo [movimientos]="movimientos"></movimiento-nuevo>
+        <movimiento-nuevo [grupos]="groups"></movimiento-nuevo>
     </div>
 </div>
 <div class="row">
     <div class="col-sm-4">
-        <div class="list-group">
-            <a class="list-group-item" style="cursor:pointer" *ngFor="let movimiento of movimientos">
-                <span class="badge">{{movimiento.entrenamientos}}</span>
-                {{movimiento.nombre}}
-            </a>
-        </div>
+        <accordion [closeOthers]="true">
+            <accordion-group *ngFor="let group of groups">
+                <div accordion-heading>
+                    {{group.title}}
+                </div>
+                <a class="list-group-item" style="cursor:pointer; margin-left: -15px; margin-right:-15px" *ngFor="let movimiento of group.movimientos">
+                    <span class="badge">{{movimiento.entrenamientos}}</span>
+                    {{movimiento.nombre}}
+                </a>
+            </accordion-group>
+        </accordion>    
     </div>
     <div class="col-sm-8">
 
