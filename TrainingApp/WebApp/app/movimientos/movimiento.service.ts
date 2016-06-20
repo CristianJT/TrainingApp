@@ -17,6 +17,12 @@ export class MovimientoService {
             .catch(this.handleError);
     }
 
+    getMovimiento(id): Observable<Movimiento> {
+        return this.http.get(this.movimientoUrl + '/' + id)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     addMovimiento(nombre: string, tipo_elemento: string, descripcion: string): Observable<Movimiento> {
         let body = JSON.stringify({ nombre, tipo_elemento, descripcion });
         let headers = new Headers({ 'Content-Type': 'application/json' });

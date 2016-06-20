@@ -1,10 +1,8 @@
 ﻿import { Component, ViewContainerRef } from '@angular/core';
 import { HTTP_PROVIDERS } from '@angular/http';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { ToastsManager } from 'ng2-toastr';
-
-import { MovimientoService } from './movimientos/movimiento.service';
-import { MovimientosComponent } from './movimientos/movimientos.component';
 
 import './rxjs-operators';
 
@@ -13,15 +11,18 @@ import './rxjs-operators';
     selector: 'my-app',       //represents the component. Create an instance of the component
     template: `
         <div class="container-fluid">
-            <h1>{{title}}</h1>
-            <movimientos></movimientos>
+             <nav>
+                <a [routerLink]="['/movimientos']">Movimientos</a>
+            </nav>
+            <router-outlet></router-outlet>
         </div>        
     `,
-    directives: [MovimientosComponent],
+    directives: [
+        ROUTER_DIRECTIVES,
+    ],
     providers: [
         HTTP_PROVIDERS,
-        ToastsManager,
-        MovimientoService
+        ToastsManager
     ]
 })
 

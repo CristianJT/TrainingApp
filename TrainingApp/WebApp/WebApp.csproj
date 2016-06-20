@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\css\forms.css" />
+    <Content Include="app\movimientos\movimiento-detalle.component.html" />
     <Content Include="app\movimientos\movimiento-nuevo.component.html" />
     <Content Include="app\movimientos\movimientos.component.html" />
     <Content Include="Global.asax" />
@@ -152,8 +153,10 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\app.component.ts" />
+    <TypeScriptCompile Include="app\app.routes.ts" />
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\movimientos\elemento.ts" />
+    <TypeScriptCompile Include="app\movimientos\movimiento-detalle.component.ts" />
     <TypeScriptCompile Include="app\movimientos\movimiento-nuevo.component.ts" />
     <TypeScriptCompile Include="app\movimientos\movimiento.service.ts" />
     <TypeScriptCompile Include="app\movimientos\movimiento.ts" />
