@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
+import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 
 import { ACCORDION_DIRECTIVES } from 'ng2-bootstrap';
 
@@ -9,7 +10,12 @@ import { MovimientoNuevoComponent} from './movimiento-nuevo.component';
 @Component({
     selector: 'movimientos',
     templateUrl: 'app/movimientos/movimientos.component.html',
-    directives: [MovimientoNuevoComponent, ACCORDION_DIRECTIVES]
+    directives: [
+        ROUTER_DIRECTIVES,
+        ACCORDION_DIRECTIVES,
+        MovimientoNuevoComponent
+    ],
+    providers: [MovimientoService]
 })
 
 export class MovimientosComponent implements OnInit {
@@ -17,6 +23,7 @@ export class MovimientosComponent implements OnInit {
     groups: any[];
 
     constructor(
+        private router: Router,
         private movimientoService: MovimientoService
     ) { }
 
@@ -25,6 +32,10 @@ export class MovimientosComponent implements OnInit {
             .subscribe(
             data => this.groups = this.asignarGrupos(data),
             error => this.errorMessage = <any>error);
+    }
+
+    onSelect(movimiento: Movimiento) {
+        this.router.navigate(['/movimientos', movimiento.id]);
     }
 
     asignarGrupos(data) {

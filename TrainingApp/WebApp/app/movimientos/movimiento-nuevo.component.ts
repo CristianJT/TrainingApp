@@ -15,7 +15,7 @@ import { Elemento, ELEMENTOS } from './elemento';
     viewProviders: [BS_VIEW_PROVIDERS]
 })
 
-export class MovimientoNuevoComponent {
+export class MovimientoNuevoComponent implements OnInit {
     //class properties
     errorMessage: string;
     movimientos_nombre: any[];

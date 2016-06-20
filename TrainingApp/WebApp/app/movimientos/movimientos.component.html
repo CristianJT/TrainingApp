@@ -19,7 +19,7 @@
                 <div accordion-heading>
                     {{group.title}}
                 </div>
-                <a class="list-group-item" style="cursor:pointer; margin-left: -15px; margin-right:-15px" *ngFor="let movimiento of group.movimientos">
+                <a class="list-group-item" style="cursor:pointer; margin-left: -15px; margin-right:-15px" *ngFor="let movimiento of group.movimientos" (click)="onSelect(movimiento)">
                     <span class="badge">{{movimiento.entrenamientos}}</span>
                     {{movimiento.nombre}}
                 </a>
@@ -27,7 +27,7 @@
         </accordion>    
     </div>
     <div class="col-sm-8">
-
+        <router-outlet></router-outlet>
     </div>
 </div>
 
