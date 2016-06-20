@@ -3,11 +3,11 @@
 <div bsModal #modal="bs-modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color:#1976D2;color:#fff">
                 <button type="button" class="close" (click)="modal.hide()" aria-label="Close">
                     <i class="fa fa-times"></i>
                 </button>
-                <h4 class="modal-title">Crear movimiento</h4>
+                <h4 class="modal-title">Nuevo movimiento</h4>
             </div>
             <form *ngIf="active" #movementForm="ngForm">
                 <div class="modal-body">
@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label>Tipo de elemento</label>
                         <select class="form-control" [(ngModel)]="model.tipo_elemento" ngControl="element" #element="ngForm" required>
-                            <option *ngFor="let e of elementos" [value]="e">{{e}}</option>
+                            <option *ngFor="let e of elementos" [value]="e.id">{{e.nombre}}</option>
                         </select>
                         <div [hidden]="element.valid || element.pristine" class="alert alert-danger">
                             El tipo de elemento es obligatorio
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" (click)="crearMovimiento()" [disabled]="!movementForm.valid">Guardar</button>
+                    <button class="btn btn-primary" (click)="crearMovimiento()" [disabled]="!movementForm.valid"><i class="fa fa-spin fa-spinner" *ngIf="cargando"></i> Guardar</button>
                 </div>
             </form>
         </div>
