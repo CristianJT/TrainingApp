@@ -1,6 +1,8 @@
 ﻿import { Component, ViewContainerRef } from '@angular/core';
 import { HTTP_PROVIDERS } from '@angular/http';
 
+import { ToastsManager } from 'ng2-toastr';
+
 import { MovimientoService } from './movimientos/movimiento.service';
 import { MovimientosComponent } from './movimientos/movimientos.component';
 
@@ -18,6 +20,7 @@ import './rxjs-operators';
     directives: [MovimientosComponent],
     providers: [
         HTTP_PROVIDERS,
+        ToastsManager,
         MovimientoService
     ]
 })

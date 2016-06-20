@@ -6,6 +6,7 @@
         'rxjs': 'node_modules/rxjs',
         'lodash': 'node_modules/lodash',
         'ng2-bootstrap': 'node_modules/ng2-bootstrap',
+        'ng2-toastr': 'node_modules/ng2-toastr',
         'moment': 'node_modules/moment'
     };
 
@@ -15,6 +16,7 @@
         'rxjs': { defaultExtension: 'js' },
         'lodash': { main: 'index.js', defaultExtension: 'js' },
         'ng2-bootstrap': { main: 'ng2-bootstrap.js', defaultExtension: 'js' },
+        'ng2-toastr': { main: 'ng2-toastr.js', defaultExtension: 'js' },
         'moment': { main: 'moment.js', defaultExtension: 'js' }
     };
 
