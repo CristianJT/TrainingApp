@@ -158,6 +158,7 @@
     <TypeScriptCompile Include="app\movimientos\elemento.ts" />
     <TypeScriptCompile Include="app\movimientos\movimiento-detalle.component.ts" />
     <TypeScriptCompile Include="app\movimientos\movimiento-nuevo.component.ts" />
+    <TypeScriptCompile Include="app\movimientos\movimiento.routes.ts" />
     <TypeScriptCompile Include="app\movimientos\movimiento.service.ts" />
     <TypeScriptCompile Include="app\movimientos\movimiento.ts" />
     <TypeScriptCompile Include="app\movimientos\movimientos.component.ts" />
