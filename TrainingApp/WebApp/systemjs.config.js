@@ -1,11 +1,10 @@
 ﻿(function (global) {
     // map tells the System loader where to look for things
     var map = {
-        'app': 'app', // 'dist',
+        'app': 'app',                                   
         '@angular': 'node_modules/@angular',
         '@angular/router': 'node_modules/@angular/router',
         'rxjs': 'node_modules/rxjs',
-        'lodash': 'node_modules/lodash',
         'ng2-bootstrap': 'node_modules/ng2-bootstrap',
         'ng2-charts': 'node_modules/ng2-charts',
         'ng2-toastr': 'node_modules/ng2-toastr',
@@ -16,7 +15,6 @@
     var packages = {
         'app': { main: 'main.js', defaultExtension: 'js' },
         'rxjs': { defaultExtension: 'js' },
-        'lodash': { main: 'index.js', defaultExtension: 'js' },
         'ng2-bootstrap': { main: 'ng2-bootstrap.js', defaultExtension: 'js' },
         'ng2-charts': { main: 'ng2-charts.js', defaultExtension: 'js' },
         'ng2-toastr': { main: 'ng2-toastr.js', defaultExtension: 'js' },
@@ -24,12 +22,14 @@
     };
 
     var ngPackageNames = [
-      'common',
-      'compiler',
-      'core',
-      'http',
-      'platform-browser',
-      'platform-browser-dynamic'
+        'common',
+        'compiler',
+        'core',
+        'forms',
+        'http',
+        'platform-browser',
+        'platform-browser-dynamic',
+        'router'    
     ];
     // Individual files (~300 requests):
     function packIndex(pkgName) {
@@ -44,9 +44,6 @@
 
     // Add package entries for angular packages
     ngPackageNames.forEach(setPackageConfig);
-
-    // No umd for router yet
-    packages['@angular/router'] = { main: 'index.js', defaultExtension: 'js' };
 
     var config = {
         map: map,

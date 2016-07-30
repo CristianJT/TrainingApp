@@ -5,11 +5,16 @@ import { MovimientoDetalleComponent } from './movimiento-detalle.component';
 
 export const MovimientosRoutes: RouterConfig = [
     {
-        path: '/movimientos',
+        path: '',
+        redirectTo: '/movimientos',
+        pathMatch: 'full'
+    },
+    {
+        path: 'movimientos',
         component: MovimientosComponent,
-        index: true,
         children: [
-            { path: '/:id', component: MovimientoDetalleComponent }
+            { path: ':id', component: MovimientoDetalleComponent },
+            { path: '', component: MovimientosComponent }
         ]
     }  
 ];
